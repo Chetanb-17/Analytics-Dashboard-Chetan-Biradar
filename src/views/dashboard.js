@@ -50,6 +50,33 @@ const DataTable = () => {
       density: "compact",
     },
 
+    muiTableHeadCellProps: {
+      sx: {
+        borderRight: "2px solid #80808066",
+        padding: "8px",
+        fontSize: "0.80rem",
+        fontWeight: "bold",
+        textAlign: "center",
+        // Apply striped border styles for header cells
+        borderBottom: "2px solid #d3d3d3", // Use a consistent border color for all headers
+        backgroundColor: "#f5f5f5", // Optional: Add a background color to differentiate headers
+      },
+    },
+
+    muiTableBodyCellProps: ({ row }) => ({
+      sx: {
+        borderRight: "2px solid #80808066",
+        padding: "2px 8px",
+        fontSize: "0.65rem",
+        cursor: "pointer",
+        whiteSpace: "normal",
+        wordWrap: "break-word",
+        // Apply striped border styles
+        borderBottom:
+          row.index % 2 === 0 ? "1px solid #d3d3d3" : "1px solid #a9a9a9", // Different colors or styles for odd and even rows
+      },
+    }),
+
     sx: {
       "& .MuiTableRow-root": {
         "&:hover": {
@@ -194,31 +221,6 @@ const DataTable = () => {
               },
             },
           }}
-          muiTableHeadCellProps={{
-            sx: {
-              borderRight: "2px solid #80808066",
-              padding: "8px",
-              fontSize: "0.80rem",
-              fontWeight: "bold",
-              textAlign: "center",
-              // Apply striped border styles for header cells
-              borderBottom: "2px solid #d3d3d3", // Use a consistent border color for all headers
-              backgroundColor: "#f5f5f5", // Optional: Add a background color to differentiate headers
-            },
-          }}
-          muiTableBodyCellProps={({ row }) => ({
-            sx: {
-              borderRight: "2px solid #80808066",
-              padding: "2px 8px",
-              fontSize: "0.65rem",
-              cursor: "pointer",
-              whiteSpace: "normal",
-              wordWrap: "break-word",
-              // Apply striped border styles
-              borderBottom:
-                row.index % 2 === 0 ? "1px solid #d3d3d3" : "1px solid #a9a9a9", // Different colors or styles for odd and even rows
-            },
-          })}
           muiPaginationProps={{
             rowsPerPageOptions: [10, 20, 50, 100, 200, 500],
             showFirstButton: false,
