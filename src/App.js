@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/layout";
+import Example from "./views/dashboard";
 
 function NotFound() {
   return <h2>404 - Page Not Found</h2>;

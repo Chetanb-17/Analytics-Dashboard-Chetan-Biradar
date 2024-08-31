@@ -1,36 +1,47 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, alpha, useTheme } from "@mui/material/styles";
+
 import Dashboard from "../views/dashboard";
-import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import HelpIcon from "@mui/icons-material/Help";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import InputBase from "@mui/material/InputBase";
+import ElectricUtilityPieChart from "../views/chart";
+import BEVStats from "../views/headdingCard";
+
+import { Box, Grid } from "@mui/material";
+
+import {
+  AppBar as MuiAppBar,
+  Badge,
+  CssBaseline,
+  Divider,
+  Drawer as MuiDrawer,
+  IconButton,
+  InputBase,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+
+import {
+  Menu as MenuIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  Home as HomeIcon,
+  Dashboard as DashboardIcon,
+  BarChart as BarChartIcon,
+  Help as HelpIcon,
+  ContactMail as ContactMailIcon,
+  Search as SearchIcon,
+  AccountCircle,
+  Mail as MailIcon,
+  Notifications as NotificationsIcon,
+  MoreVert as MoreIcon,
+} from "@mui/icons-material";
+
 const headerLogo =
   "https://www.esource.com/sites/default/files/es-blog-5-27-16-evs-1f_0.png";
 
@@ -390,10 +401,21 @@ export default function Sidebar() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, pt: 2, pb: 2 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 2, overflowX: "hidden" }}>
         <DrawerHeader />
-        {/* Other components can go here */}
-        <Dashboard />
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={12}>
+            <BEVStats />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <ElectricUtilityPieChart />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Dashboard />
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
