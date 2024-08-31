@@ -99,14 +99,14 @@ const DataTable = () => {
         styleOverrides: {
           root: {
             borderBottom: "1px solid rgba(224, 224, 224, 1)",
-            backgroundColor: "#fff", // Custom background color for table cells
+            backgroundColor: "#000", // Custom background color for table cells
             whiteSpace: "nowrap", // Prevent header text from wrapping
             overflow: "hidden", // Hide overflow text
             textOverflow: "ellipsis",
           },
           head: {
-            backgroundColor: "#054992", // Custom header background color
-            color: "#fff", // Header text color
+            // backgroundColor: "#054992", // Custom header background color
+            color: "#000", // Header text color
             fontWeight: "bold",
             position: "sticky", // Make the header sticky
             top: 0,
@@ -121,7 +121,7 @@ const DataTable = () => {
         styleOverrides: {
           root: {
             "&:nth-of-type(odd)": {
-              backgroundColor: "#054992", // Alternate row color
+              // backgroundColor: "#054992", // Alternate row color
               color: "#000", // Alternate row text color
             },
           },
