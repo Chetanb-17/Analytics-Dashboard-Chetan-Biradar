@@ -2,26 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
-  MRT_TablePagination,
 } from "material-react-table";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box } from "@mui/material";
-import { WrapText } from "@mui/icons-material";
-const pagination_style = {
-  flexGrow: 1,
-  display: "flex",
-  justifyContent: "center",
-  marginLeft: "18%",
-};
+import { poolHeader } from "../configuration/config";
 
-const box_bottom_styles = {
-  display: "flex",
-  alignItems: "center", // Corrected to "alignItems"
-  marginLeft: "10px",
-  minWidth: "10px !important",
-  width: "100%",
-  justifyContent: "space-between",
-};
 const DataTable = () => {
   const [data, setData] = useState([]); // State to hold data from JSON
   const [columns, setColumns] = useState([]); // State to hold column definitions
@@ -34,10 +19,12 @@ const DataTable = () => {
       // Dynamically generate column definitions based on the JSON keys
       const generatedColumns = Object.keys(jsonData[0]).map((key) => ({
         accessorKey: key,
-        header: key,
-        size: 150,
-        filterVariant: "select", // Makes the filter a dropdown
+        header: poolHeader(key),
+        size: 170,
+        filterVariant: "select",
+        enableClickToCopy: true,
       }));
+
       setColumns(generatedColumns);
     });
   }, []);
@@ -45,8 +32,8 @@ const DataTable = () => {
   const tableInstance = useMaterialReactTable({
     columns,
     data,
-    enableRowSelection: true,
     columnFilterDisplayMode: "subheader",
+    enableColumnFilters: false,
     positionToolbarAlertBanner: "center",
     enableDensityToggle: false,
     enableStickyHeader: true,
@@ -55,7 +42,6 @@ const DataTable = () => {
     enableColumnActions: false,
     enableRowVirtualization: true, // Enable virtualization
     rowVirtualizerOptions: { overscan: 50 },
-
     state: {
       showGlobalFilter: true,
     },
@@ -63,6 +49,7 @@ const DataTable = () => {
       showColumnFilters: false,
       density: "compact",
     },
+
     sx: {
       "& .MuiTableRow-root": {
         "&:hover": {
@@ -73,18 +60,6 @@ const DataTable = () => {
         color: "#424242", // Custom cell text color
       },
       "& .MuiTablePagination-root": {
-        position: "sticky", // Make pagination sticky
-        bottom: 0, // Stick pagination to the bottom
-        backgroundColor: "#fff", // Background color to prevent overlap
-        zIndex: 1, // Ensure it stays above the scrollable content
-      },
-    },
-
-    muiPaginationProps: {
-      rowsPerPageOptions: [10, 20, 50, 100, 200, 500],
-      showFirstButton: false,
-      showLastButton: false,
-      sx: {
         position: "sticky", // Make pagination sticky
         bottom: 0, // Stick pagination to the bottom
         backgroundColor: "#fff", // Background color to prevent overlap
@@ -114,15 +89,18 @@ const DataTable = () => {
             whiteSpace: "nowrap", // Prevent header text from wrapping
             overflow: "hidden", // Hide overflow text
             textOverflow: "ellipsis", // Show ellipsis for overflowed text
+            width: "300px",
           },
         },
       },
+
       MuiTableRow: {
         styleOverrides: {
           root: {
             "&:nth-of-type(odd)": {
               // backgroundColor: "#054992", // Alternate row color
               color: "#000", // Alternate row text color
+              width: "300px",
             },
           },
         },
@@ -154,22 +132,6 @@ const DataTable = () => {
             },
           }}
           enablePagination={true}
-          renderBottomToolbar={({ table }) => {
-            return (
-              <Box sx={box_bottom_styles}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                  }}
-                ></Box>
-                <Box sx={pagination_style}>
-                  <MRT_TablePagination table={table} />
-                </Box>
-              </Box>
-            );
-          }}
           enableColumnResizing
           columnResizeMode="onEnd"
           muiTableProps={{
@@ -182,9 +144,10 @@ const DataTable = () => {
           }}
           enableFullScreenToggle={false}
           enableGlobalFilter={true}
-          enableShowHide={false}
+          enableShowHide={true}
           globalFilterFn="myCustomFilterFn"
           enableColumnFilterModes={false}
+          columnFilterDisplayMode={false}
           enableColumnOrdering
           enableColumnPinning={true}
           muiSearchTextFieldProps={{
@@ -206,28 +169,9 @@ const DataTable = () => {
                   minWidth: "114px",
                 }}
               >
-                Load More Data
+                Electric Vehicle Population
               </Box>
             );
-          }}
-          muiTableHeadCellProps={{
-            sx: {
-              background: "#00539E",
-              color: "#FFFFFF",
-              fontSize: "0.65rem",
-              padding: "2px 8px",
-            },
-          }}
-          muiTableBodyCellProps={{
-            sx: {
-              borderRight: "2px solid #80808066",
-              opacity: 0.1,
-              padding: "2px 8px",
-              fontSize: "0.65rem",
-              cursor: "pointer",
-              whiteSpace: "normal",
-              wordWrap: "break-word",
-            },
           }}
           muiTableBodyProps={{
             sx: {
@@ -248,6 +192,42 @@ const DataTable = () => {
               "@media (min-height: 1024px)": {
                 minHeight: "82vh",
               },
+            },
+          }}
+          muiTableHeadCellProps={{
+            sx: {
+              borderRight: "2px solid #80808066",
+              padding: "8px",
+              fontSize: "0.80rem",
+              fontWeight: "bold",
+              textAlign: "center",
+              // Apply striped border styles for header cells
+              borderBottom: "2px solid #d3d3d3", // Use a consistent border color for all headers
+              backgroundColor: "#f5f5f5", // Optional: Add a background color to differentiate headers
+            },
+          }}
+          muiTableBodyCellProps={({ row }) => ({
+            sx: {
+              borderRight: "2px solid #80808066",
+              padding: "2px 8px",
+              fontSize: "0.65rem",
+              cursor: "pointer",
+              whiteSpace: "normal",
+              wordWrap: "break-word",
+              // Apply striped border styles
+              borderBottom:
+                row.index % 2 === 0 ? "1px solid #d3d3d3" : "1px solid #a9a9a9", // Different colors or styles for odd and even rows
+            },
+          })}
+          muiPaginationProps={{
+            rowsPerPageOptions: [10, 20, 50, 100, 200, 500],
+            showFirstButton: false,
+            showLastButton: false,
+            sx: {
+              position: "sticky", // Make pagination sticky
+              bottom: 0, // Stick pagination to the bottom
+              backgroundColor: "#fff", // Background color to prevent overlap
+              zIndex: 1, // Ensure it stays above the scrollable content
             },
           }}
         />

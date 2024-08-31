@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { styled, alpha, useTheme } from "@mui/material/styles";
 
 import Dashboard from "../views/dashboard";
 import ElectricUtilityPieChart from "../views/chart";
 import BEVStats from "../views/headdingCard";
-
 import { Box, Grid } from "@mui/material";
-
 import {
   AppBar as MuiAppBar,
   Badge,
@@ -292,7 +290,7 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Analytics Dashboard
+            Electric Vehicle Population
           </Typography>
           <Search>
             <SearchIconWrapper>
