@@ -4,7 +4,7 @@ I have used The Dataset and Imaplemeneted user Friendly Dashboard in Frontend an
 
 https://analytics-dashboard-chetan.vercel.app/
 
-About Dataset:
+**About Dataset:**
 BEV sales during Q2 2023 grew over 50% YoY. One in every 10 cars sold during Q2 2023
 was a pure battery electric vehicle (BEV). China remained the leader in global BEV sales
 followed by USA and Germany.
