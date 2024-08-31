@@ -38,7 +38,6 @@ const DataTable = () => {
     enableDensityToggle: false,
     enableStickyHeader: true,
     enablePaginationSticky: true, // Custom prop to make pagination sticky
-    muiTableContainerProps: { sx: { maxHeight: "500px" } },
     enableColumnActions: false,
     enableRowVirtualization: true, // Enable virtualization
     rowVirtualizerOptions: { overscan: 50 },
@@ -76,6 +75,15 @@ const DataTable = () => {
           row.index % 2 === 0 ? "1px solid #d3d3d3" : "1px solid #a9a9a9", // Different colors or styles for odd and even rows
       },
     }),
+
+    muiTableBodyProps: {
+      sx: {
+        minHeight: "30vh",
+        "& tr:nth-of-type(even)": {
+          backgroundColor: "#F7F7F7",
+        },
+      },
+    },
 
     sx: {
       "& .MuiTableRow-root": {
@@ -200,13 +208,6 @@ const DataTable = () => {
               </Box>
             );
           }}
-          muiTableBodyProps={{
-            sx: {
-              "& tr:nth-of-type(even)": {
-                backgroundColor: "#F7F7F7",
-              },
-            },
-          }}
           muiTopToolbarProps={{
             sx: {
               minHeight: "32px !important",
@@ -219,17 +220,6 @@ const DataTable = () => {
               "@media (min-height: 1024px)": {
                 minHeight: "82vh",
               },
-            },
-          }}
-          muiPaginationProps={{
-            rowsPerPageOptions: [10, 20, 50, 100, 200, 500],
-            showFirstButton: false,
-            showLastButton: false,
-            sx: {
-              position: "sticky", // Make pagination sticky
-              bottom: 0, // Stick pagination to the bottom
-              backgroundColor: "#fff", // Background color to prevent overlap
-              zIndex: 1, // Ensure it stays above the scrollable content
             },
           }}
         />
